@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AlgoViet - Hiểu thuật toán bằng cách nhìn nó chạy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/giao-dien.css">
+</head>
+<body class="trang-chu">
+  <header class="thanh-tren">
+    <a class="logo" href="index.html">Algo<span>Viet</span></a>
+    <nav class="dieu-huong" style="display:flex">
+      <a href="index.html" class="dang-chon">Trang chủ</a>
+      <a href="#thuat-toan">Tất cả thuật toán</a>
+    </nav>
+  </header>
+
+  <section class="mo-dau">
+    <div class="mo-dau-trong">
+      <h1>Hiểu thuật toán bằng cách <span>nhìn nó chạy</span></h1>
+      <p>Chọn một thuật toán, nhập dữ liệu của bạn và xem từng bước diễn ra: số nào đang được so sánh, dòng code nào đang chạy, đã tốn bao nhiêu phép tính.</p>
+      <div class="o-tim">
+        <input id="tim" type="search" placeholder="Tìm thuật toán, ví dụ: Horner, Fibonacci..." aria-label="Tìm thuật toán">
+      </div>
+      <a class="nut nut-chinh nut-lon" href="hoc.html?tt=tim-min">Bắt đầu với Tìm số nhỏ nhất →</a>
+    </div>
+  </section>
+
+  <main class="noi-dung-chu">
+    <section class="cach-hoc">
+      <div class="buoc-hoc"><b>1</b><h3>Xem chạy từng bước</h3><p>Hình động kèm lời giải thích bằng tiếng Việt, tiến lùi tùy ý.</p></div>
+      <div class="buoc-hoc"><b>2</b><h3>Tự đoán bước tiếp theo</h3><p>Web dừng lại hỏi bạn trước mỗi bước quan trọng để kiểm tra mình đã hiểu chưa.</p></div>
+      <div class="buoc-hoc"><b>3</b><h3>Tự viết code <small>sắp có</small></h3><p>Viết lại thuật toán và bấm kiểm tra, web chỉ ra chỗ sai.</p></div>
+    </section>
+
+    <section id="thuat-toan">
+      <div id="danh-sach-nhom"></div>
+      <p id="khong-thay" class="ghi-chu-nho" hidden>Không tìm thấy thuật toán nào phù hợp.</p>
+    </section>
+  </main>
+
+  <footer class="chan-trang">AlgoViet · Đồ án môn Phân tích thiết kế thuật toán</footer>
+
+  <script src="js/danh-sach.js"></script>
+  <script src="js/trang-chu.js"></script>
+</body>
+</html>

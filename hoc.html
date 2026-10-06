@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AlgoViet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/giao-dien.css">
+</head>
+<body>
+  <header class="thanh-tren">
+    <a class="logo" href="index.html">Algo<span>Viet</span></a>
+    <nav class="dieu-huong">
+      <a href="index.html">Trang chủ</a>
+      <a href="index.html#thuat-toan">Tất cả thuật toán</a>
+    </nav>
+    <button class="nut-huong-dan" id="nut-huong-dan" title="Xem hướng dẫn sử dụng">? Hướng dẫn</button>
+    <button class="nut-menu" id="nut-menu" aria-label="Mở danh sách thuật toán">☰ Thuật toán</button>
+  </header>
+
+  <div class="bo-cuc">
+    <aside class="thanh-ben" id="thanh-ben"></aside>
+
+    <main class="noi-dung">
+      <div class="dau-trang">
+        <h1 id="ten-thuat-toan"></h1>
+        <span class="huy-hieu" id="do-phuc-tap"></span>
+        <div class="tab" role="tablist">
+          <button class="dang-chon" data-tab="chay">Chạy thử</button>
+          <button data-tab="luyen-tap">Luyện tập</button>
+          <button data-tab="ly-thuyet">Ý tưởng &amp; lý thuyết</button>
+        </div>
+      </div>
+
+      <!-- ================= TAB CHAY THU ================= -->
+      <section id="tab-chay">
+        <div class="the">
+          <div class="dieu-khien-tren">
+            <div class="nhom">
+              <label>Cách làm</label>
+              <div class="chon-che-do" id="chon-cach"></div>
+            </div>
+            <div class="nhom">
+              <label for="du-lieu">Dãy số (1 đến 99, tối đa 16 số)</label>
+              <input class="o-nhap" id="du-lieu" type="text" autocomplete="off">
+            </div>
+            <button class="nut nut-chinh" id="nut-chay">Chạy</button>
+            <button class="nut" id="nut-mau">Ví dụ mẫu</button>
+            <button class="nut" id="nut-ngau-nhien">Ngẫu nhiên</button>
+            <label class="cong-tac" title="Web sẽ dừng lại hỏi bạn trước mỗi phép so sánh">
+              <input type="checkbox" id="che-do-doan"><span class="ray"></span>
+              <span>Đoán bước tiếp theo</span>
+            </label>
+            <span id="diem" class="huy-hieu" aria-live="polite"></span>
+          </div>
+          <div class="loi" id="loi" role="alert"></div>
+        </div>
+
+        <div class="the">
+          <div class="chu-thich" id="chu-thich"></div>
+          <div class="san-khau" id="san-khau"></div>
+
+          <div class="giai-thich" aria-live="polite">
+            <span class="so-buoc" id="so-buoc"></span>
+            <p id="giai-thich"></p>
+          </div>
+
+          <div class="cau-hoi" id="cau-hoi" hidden>
+            <div class="tieu-de"></div>
+            <div class="lua-chon"></div>
+            <div class="phan-hoi" aria-live="polite"></div>
+          </div>
+
+          <div class="trinh-phat">
+            <button class="nut" id="nut-dau" title="Về đầu">⏮</button>
+            <button class="nut" id="nut-lui" title="Lùi một bước (←)">◀ Lùi</button>
+            <button class="nut nut-chinh" id="nut-phat">▶ Phát</button>
+            <button class="nut" id="nut-tien" title="Tiến một bước (→)">Tiến ▶</button>
+            <button class="nut" id="nut-cuoi" title="Đến cuối">⏭</button>
+            <input class="thanh-tien-do" id="tien-do" type="range" min="0" value="0" aria-label="Tiến độ">
+            <div class="toc-do">
+              <label for="toc-do">Tốc độ</label>
+              <select id="toc-do">
+                <option value="1800">Chậm</option>
+                <option value="1100" selected>Vừa</option>
+                <option value="550">Nhanh</option>
+              </select>
+            </div>
+          </div>
+          <div class="goi-y-phim"><kbd>Space</kbd> phát / tạm dừng &nbsp; <kbd>←</kbd> <kbd>→</kbd> lùi / tiến một bước</div>
+        </div>
+
+        <div class="hang">
+          <div class="the">
+            <h2>Code C++</h2>
+            <pre class="code" id="code"></pre>
+          </div>
+          <div class="the" id="khu-bien">
+            <h2>Giá trị các biến</h2>
+            <table class="bang-bien"><tbody id="bang-bien"></tbody></table>
+            <div class="bo-dem">
+              <div><b id="dem-so-sanh">0</b><span>phép so sánh</span></div>
+              <div><b id="dem-gan">0</b><span>phép gán</span></div>
+            </div>
+            <p class="ghi-chu-nho">Chỉ đếm so sánh giữa các phần tử (không đếm điều kiện của vòng lặp), giống cách đếm trong bài học.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB LUYEN TAP ================= -->
+      <section id="tab-luyen-tap" hidden>
+        <div class="the">
+          <div class="chon-che-do chon-bai-tap">
+            <button id="nut-bt-dien">✏️ Điền vào chỗ trống</button>
+            <button id="nut-bt-sap-xep">↕ Sắp xếp dòng code</button>
+          </div>
+
+          <div id="bt-dien">
+            <p class="mo-ta-bt">Điền vào các ô trống để hoàn thành hàm. Bấm <b>Kiểm tra</b>: web sẽ <b>chạy thật</b> code của bạn trên nhiều bộ dữ liệu, nếu sai sẽ chỉ ra sai ở đâu. Cách viết khác đáp án mẫu mà chạy đúng vẫn được tính là đúng.</p>
+            <pre class="code code-dien" id="code-dien"></pre>
+            <div class="hang-nut">
+              <button class="nut nut-chinh" id="nut-kiem-tra-dien">Kiểm tra</button>
+              <button class="nut" id="nut-goi-y-dien">💡 Gợi ý</button>
+              <button class="nut" id="nut-dap-an-dien">Xem đáp án</button>
+              <button class="nut" id="nut-lam-lai-dien">Làm lại</button>
+            </div>
+            <div id="kq-dien" aria-live="polite"></div>
+          </div>
+
+          <div id="bt-sap-xep" hidden>
+            <p class="mo-ta-bt">Các dòng code đã bị xáo trộn. Kéo thả (hoặc bấm ▲ ▼) để xếp lại cho đúng rồi bấm <b>Kiểm tra</b>.</p>
+            <div class="chon-che-do" id="chon-code-sap-xep"></div>
+            <ol class="ds-sap-xep" id="ds-sap-xep"></ol>
+            <div class="hang-nut">
+              <button class="nut nut-chinh" id="nut-kiem-tra-sap-xep">Kiểm tra</button>
+              <button class="nut" id="nut-xao-lai">Xáo lại</button>
+              <button class="nut" id="nut-dap-an-sap-xep">Xem đáp án</button>
+            </div>
+            <div id="kq-sap-xep" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB LY THUYET ================= -->
+      <section id="tab-ly-thuyet" hidden>
+        <div class="the ly-thuyet" id="ly-thuyet"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/danh-sach.js"></script>
+  <script src="js/thuat-toan/tim-min.js"></script>
+  <script src="js/thuat-toan/insertion-sort.js"></script>
+  <script src="js/thuat-toan/shell-sort.js"></script>
+  <script src="js/thuat-toan/heap-sort.js"></script>
+  <script src="js/trinh-phat.js"></script>
+  <script src="js/luyen-tap.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/huong-dan.js"></script>
+</body>
+</html>
