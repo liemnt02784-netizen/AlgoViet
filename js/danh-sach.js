@@ -27,6 +27,8 @@ window.AlgoViet.danhSach = [
         moTa: "Insertion Sort nhưng cho các phần tử nhảy cóc theo khoảng cách d trước." },
       { id: "heap-sort", ten: "Heap Sort", doPhucTap: "O(n log n)", doKho: "Khó", co: true,
         moTa: "Dựng Max Heap (cây), rồi lần lượt đưa số lớn nhất về cuối dãy." },
+      { id: "radix-sort", ten: "Radix Sort", doPhucTap: "O(d·n)", doKho: "Vừa", co: true,
+        moTa: "Xếp theo từng chữ số (đơn vị, chục, trăm...), không so sánh hai phần tử nào cả." },
     ],
   },
   {

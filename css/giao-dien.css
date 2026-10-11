@@ -22,7 +22,7 @@
 
   --bo-goc: 12px;
   --bong: 0 1px 3px rgba(13, 59, 102, 0.08), 0 4px 16px rgba(13, 59, 102, 0.06);
-  --font: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
+  --font: "Inter", "Segoe UI", system-ui, sans-serif;
   --font-code: "JetBrains Mono", Consolas, monospace;
 }
 
@@ -214,6 +214,12 @@ kbd { font-family: var(--font-code); font-size: 11px; border: 1px solid var(--vi
 .khung-cot { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .tieu-d { font-weight: 700; color: var(--xanh-dam); background: var(--xanh-nhat); padding: 2px 14px; border-radius: 999px; font-size: 14px; }
 .chi-so + .chi-so { margin-top: 0; font-size: 11px; }
+
+
+/* ---------- Radix Sort: mang + dem + output ---------- */
+.khung-heap .tieu-d { text-align: center; margin: 0 auto 10px; display: table; }
+.nhan-hang { text-align: center; font-size: 13px; color: var(--chu-phu); margin: 10px 0 2px; }
+.o-mang.la-con { background: var(--xanh-nhat); box-shadow: none; }
 
 /* ---------- Heap Sort: cay + mang ---------- */
 .khung-heap { width: 100%; max-width: 760px; margin: auto; }

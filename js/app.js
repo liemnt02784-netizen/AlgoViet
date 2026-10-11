@@ -47,9 +47,16 @@
   // Đọc và kiểm tra dãy số người dùng nhập.
   // Trả về { so: [...] } nếu hợp lệ, hoặc { loi: "..." } nếu sai.
   // ---------------------------------------------------------------
+  // Mỗi thuật toán có thể tự khai giới hạn nhập liệu riêng qua TT.gioiHan
+  // (ví dụ Radix Sort cần số 3 chữ số). Không khai thì dùng mặc định 1-99, tối đa 16 số.
+  var GH = TT.gioiHan || {};
+  var soMin = GH.min || 1;
+  var soMax = GH.max || 99;
+  var soLuongMax = GH.soLuongMax || 16;
+
   function docDuLieu() {
     var chu = $("du-lieu").value.trim();
-    if (!chu) return { loi: "Hãy nhập dãy số, ví dụ: 7 2 9 4" };
+    if (!chu) return { loi: "Hãy nhập dãy số, ví dụ: " + TT.viDu.join(" ") };
 
     var phan = chu.split(/[\s,;]+/);       // tách theo dấu cách, dấu phẩy, dấu chấm phẩy
     var so = [];
@@ -57,14 +64,14 @@
       var p = phan[k];
       if (p === "") continue;              // bỏ qua phần rỗng
       if (!/^\d+$/.test(p)) {
-        return { loi: '"' + p + '" không phải số nguyên dương. Chỉ nhập các số từ 1 đến 99, cách nhau bằng dấu cách hoặc dấu phẩy.' };
+        return { loi: '"' + p + '" không phải số nguyên dương. Chỉ nhập các số từ ' + soMin + ' đến ' + soMax + ', cách nhau bằng dấu cách hoặc dấu phẩy.' };
       }
       var v = Number(p);
-      if (v < 1 || v > 99) return { loi: "Số " + v + " nằm ngoài khoảng 1 đến 99." };
+      if (v < soMin || v > soMax) return { loi: "Số " + v + " nằm ngoài khoảng " + soMin + " đến " + soMax + "." };
       so.push(v);
     }
     if (so.length < 2) return { loi: "Cần ít nhất 2 số để so sánh." };
-    if (so.length > 16) return { loi: "Bạn nhập " + so.length + " số, tối đa 16 số để hình còn dễ nhìn." };
+    if (so.length > soLuongMax) return { loi: "Bạn nhập " + so.length + " số, tối đa " + soLuongMax + " số để hình còn dễ nhìn." };
     return { so: so };
   }
 
@@ -122,10 +129,11 @@
   };
 
   $("nut-ngau-nhien").onclick = function () {
-    var n = 5 + Math.floor(Math.random() * 4);         // 5 đến 8 số
+    var n = 5 + Math.floor(Math.random() * 4);           // 5 đến 8 số
+    var tranTren = Math.min(soMax, 60);                   // mặc định như cũ (1-60), trừ khi soMax nhỏ hơn
     var so = [];
     for (var k = 0; k < n; k++) {
-      so.push(1 + Math.floor(Math.random() * 60));     // mỗi số từ 1 đến 60
+      so.push(soMin + Math.floor(Math.random() * (tranTren - soMin + 1)));
     }
     $("du-lieu").value = so.join(" ");
     chay();

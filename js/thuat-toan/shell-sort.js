@@ -151,7 +151,7 @@
         loai = "xong";
       } else if (h.hienNhom) {
         loai = "chua-xet";
-        kieu = "background:" + MAU_NHOM[p % h.d] + ";";
+        kieu = "background:" + MAU_NHOM[p % h.d] + ";color:#0a0a0a;";   // chu den, vi mau nhom la cac mau pastel sang
         dongNhom = '<div class="chi-so">nhóm ' + (p % h.d) + '</div>';
       } else if (p === h.j) {
         loai = "cho-chen";
