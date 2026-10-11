@@ -53,6 +53,10 @@
   var soMin = GH.min || 1;
   var soMax = GH.max || 99;
   var soLuongMax = GH.soLuongMax || 16;
+  var nhanDuLieu = document.querySelector('label[for="du-lieu"]');
+  if (nhanDuLieu) {
+    nhanDuLieu.textContent = "Dãy số (" + soMin + " đến " + soMax + ", tối đa " + soLuongMax + " số)";
+  }
 
   function docDuLieu() {
     var chu = $("du-lieu").value.trim();
