@@ -11,36 +11,44 @@
 (function () {
   window.AlgoViet = window.AlgoViet || { thuatToan: {} };
 
+  // Cấu trúc tách 3 hàm riêng (timMax, countingSortTheoChuSo, radixSort)
+  // giống đúng khuôn bài tập // TODO sinh viên làm ở Tuần 4, để minh họa
+  // và bài làm khớp nhau, không gây rối khi đối chiếu.
   var code = [
-    "void countingSortTheoChuSo(int a[], int n, int viTri) {", // 1
-    "    int output[100];",                                    // 2
-    "    int dem[10] = {0};",                                  // 3
-    "    for (int i = 0; i < n; i++) {",                       // 4
-    "        int chuSo = (a[i] / viTri) % 10;",                // 5
-    "        dem[chuSo]++;",                                   // 6
-    "    }",                                                   // 7
-    "    for (int i = 1; i < 10; i++) {",                      // 8
-    "        dem[i] += dem[i-1];",                             // 9
-    "    }",                                                   // 10
-    "    for (int i = n - 1; i >= 0; i--) {",                  // 11
-    "        int chuSo = (a[i] / viTri) % 10;",                // 12
-    "        output[dem[chuSo] - 1] = a[i];",                  // 13
-    "        dem[chuSo]--;",                                   // 14
+    "int timMax(int a[], int n) {",                            // 1
+    "    int max = a[0];",                                     // 2
+    "    for (int i = 1; i < n; i++) {",                       // 3
+    "        if (a[i] > max) max = a[i];",                     // 4
+    "    }",                                                   // 5
+    "    return max;",                                         // 6
+    "}",                                                       // 7
+    "",                                                         // 8
+    "void countingSortTheoChuSo(int a[], int n, int viTri) {", // 9
+    "    int output[100];",                                    // 10
+    "    int dem[10] = {0};",                                  // 11
+    "    for (int i = 0; i < n; i++) {",                       // 12
+    "        int chuSo = (a[i] / viTri) % 10;",                // 13
+    "        dem[chuSo]++;",                                   // 14
     "    }",                                                   // 15
-    "    for (int i = 0; i < n; i++) {",                       // 16
-    "        a[i] = output[i];",                               // 17
+    "    for (int i = 1; i < 10; i++) {",                      // 16
+    "        dem[i] += dem[i-1];",                             // 17
     "    }",                                                   // 18
-    "}",                                                       // 19
-    "",                                                         // 20
-    "void radixSort(int a[], int n) {",                        // 21
-    "    int maxVal = a[0];",                                  // 22
-    "    for (int i = 1; i < n; i++) {",                       // 23
-    "        if (a[i] > maxVal) maxVal = a[i];",               // 24
-    "    }",                                                   // 25
-    "    for (int viTri = 1; maxVal / viTri > 0; viTri *= 10) {", // 26
-    "        countingSortTheoChuSo(a, n, viTri);",             // 27
-    "    }",                                                   // 28
-    "}"                                                        // 29
+    "    for (int i = n - 1; i >= 0; i--) {",                  // 19
+    "        int chuSo = (a[i] / viTri) % 10;",                // 20
+    "        output[dem[chuSo] - 1] = a[i];",                  // 21
+    "        dem[chuSo]--;",                                   // 22
+    "    }",                                                   // 23
+    "    for (int i = 0; i < n; i++) {",                       // 24
+    "        a[i] = output[i];",                               // 25
+    "    }",                                                   // 26
+    "}",                                                       // 27
+    "",                                                         // 28
+    "void radixSort(int a[], int n) {",                        // 29
+    "    int max = timMax(a, n);",                             // 30
+    "    for (int viTri = 1; max / viTri > 0; viTri *= 10) {", // 31
+    "        countingSortTheoChuSo(a, n, viTri);",             // 32
+    "    }",                                                   // 33
+    "}"                                                        // 34
   ];
 
   var TEN_HANG = ["đơn vị", "chục", "trăm", "nghìn", "chục nghìn", "trăm nghìn"];
@@ -84,12 +92,12 @@
     for (var m = 1; m < n; m++) {
       if (a[m] > maxVal) maxVal = a[m];
     }
-    ghi(22, "Tìm số lớn nhất trong mảng để biết cần xét bao nhiêu chữ số. Số lớn nhất là " + maxVal +
+    ghi(30, "Tìm số lớn nhất trong mảng để biết cần xét bao nhiêu chữ số. Số lớn nhất là " + maxVal +
             ", có " + String(maxVal).length + " chữ số, nên cần " + String(maxVal).length + " lượt xếp.",
-        { n: n, maxVal: maxVal }, [], chup(a, -1, null, null, -1, -1, -1, false), null);
+        { n: n, max: maxVal }, [], chup(a, -1, null, null, -1, -1, -1, false), null);
 
     for (var viTri = 1; Math.floor(maxVal / viTri) > 0; viTri *= 10) {
-      ghi(26, "Bắt đầu lượt xét chữ số hàng " + tenHang(viTri) + " (viTri = " + viTri + "). " +
+      ghi(31, "Bắt đầu lượt xét chữ số hàng " + tenHang(viTri) + " (viTri = " + viTri + "). " +
               "Mảng hiện tại: " + a.join(", ") + ".",
           { viTri: viTri }, ["viTri"], chup(a, viTri, null, null, -1, -1, -1, false), null);
 
@@ -99,7 +107,7 @@
         var chuSo = Math.floor(a[i] / viTri) % 10;
         dem[chuSo]++;
         gan++;
-        ghi(6, "Chữ số hàng " + tenHang(viTri) + " của a[" + i + "] = " + a[i] + " là " + chuSo +
+        ghi(14, "Chữ số hàng " + tenHang(viTri) + " của a[" + i + "] = " + a[i] + " là " + chuSo +
                ". Tăng dem[" + chuSo + "] lên " + dem[chuSo] + ".",
             { i: i, "a[i]": a[i], chuSo: chuSo }, ["chuSo"], chup(a, viTri, dem, null, i, -1, chuSo, false), null);
       }
@@ -110,7 +118,7 @@
         dem[c] += dem[c - 1];
         gan++;
       }
-      ghi(9, "Cộng dồn mảng đếm: dem[c] += dem[c-1], để biết mỗi chữ số kết thúc ở vị trí nào trong mảng kết quả. " +
+      ghi(17, "Cộng dồn mảng đếm: dem[c] += dem[c-1], để biết mỗi chữ số kết thúc ở vị trí nào trong mảng kết quả. " +
               "Trước: " + demTruoc.join(",") + "  →  Sau: " + dem.join(","),
           { dem: dem.join(",") }, ["dem"], chup(a, viTri, dem, null, -1, -1, -1, false), null);
 
@@ -125,7 +133,7 @@
         var dungSai = dem[cs];
         dem[cs]--;
         gan++;
-        ghi(13, "Xét a[" + j + "] = " + a[j] + " (chữ số " + cs + "). Đặt vào output[" + viTriMoi + "] " +
+        ghi(21, "Xét a[" + j + "] = " + a[j] + " (chữ số " + cs + "). Đặt vào output[" + viTriMoi + "] " +
                 "(vì dem[" + cs + "] = " + dungSai + "), rồi giảm dem[" + cs + "] còn " + dem[cs] + ".",
             { j: j, "a[j]": a[j], chuSo: cs, "output_vt": viTriMoi }, ["output_vt"],
             chup(a, viTri, dem, output, j, viTriMoi, cs, false), null);
@@ -136,11 +144,11 @@
         a[k] = output[k];
       }
       gan += n;
-      ghi(17, "Sao chép output trở lại mảng a. Sau lượt xét chữ số hàng " + tenHang(viTri) + ": " + a.join(", ") + ".",
+      ghi(25, "Sao chép output trở lại mảng a. Sau lượt xét chữ số hàng " + tenHang(viTri) + ": " + a.join(", ") + ".",
           { mang: a.join(",") }, ["mang"], chup(a, viTri, null, output, -1, -1, -1, false), null);
     }
 
-    ghi(29, "Hoàn thành! Đã xét hết các chữ số, mảng đã tăng dần: " + a.join(", ") + ". " +
+    ghi(34, "Hoàn thành! Đã xét hết các chữ số, mảng đã tăng dần: " + a.join(", ") + ". " +
             "Lưu ý: 0 phép so sánh trong suốt quá trình, vì Radix Sort không so sánh hai phần tử với nhau.",
         { n: n }, [], chup(a, -1, null, null, -1, -1, -1, true), null);
 
