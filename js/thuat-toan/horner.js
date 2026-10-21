@@ -45,13 +45,13 @@
       result = result * x;
       nhan++;
       ghi(3, "Nhân result với x (" + x + "): result = " + (result / x) + " × " + x + " = " + result + ".",
-          { result: result }, ["result"], chup(result, n - i, false), null);
+          { result: result }, ["result"], chup(result, i, false), null);
 
       var heSo = he[i];
       result = result + heSo;
       cong++;
       ghi(4, "Cộng hệ số a[" + (n - i) + "] = " + heSo + ": result = " + (result - heSo) + " + " + heSo + " = " + result + ".",
-          { result: result, "a[i]": heSo }, ["result"], chup(result, n - i, false), null);
+          { result: result, "a[i]": heSo }, ["result"], chup(result, i, false), null);
     }
 
     ghi(5, "Hoàn thành! P(" + x + ") = " + result + ". Tốn " + nhan + " phép nhân và " + cong + " phép cộng (so với cách cơ bản tốn " + (2 * n - 1 >= 0 ? 2 * n - 1 : 0) + " phép nhân).",
