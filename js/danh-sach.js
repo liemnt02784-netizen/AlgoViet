@@ -45,11 +45,11 @@ window.AlgoViet.danhSach = [
   {
     nhom: "Đa thức và ma trận", hinh: "luoi",
     muc: [
-      { id: "horner", ten: "Đa thức và Horner", doPhucTap: "O(n)", doKho: "Dễ",
+      { id: "horner", ten: "Đa thức và Horner", doPhucTap: "O(n)", doKho: "Dễ", co: true,
         moTa: "Tính giá trị đa thức, so sánh số phép nhân 2n − 1 với n." },
-      { id: "nhan-ma-tran", ten: "Nhân ma trận", doPhucTap: "O(n³)", doKho: "Vừa",
+      { id: "nhan-ma-tran", ten: "Nhân ma trận", doPhucTap: "O(n³)", doKho: "Vừa", co: true,
         moTa: "Hàng nhân cột, điền dần từng ô của ma trận kết quả." },
-      { id: "strassen", ten: "Strassen", doPhucTap: "O(n^2,81)", doKho: "Khó",
+      { id: "strassen", ten: "Strassen", doPhucTap: "O(n^2,81)", doKho: "Khó", co: true,
         moTa: "Chia khối, 7 phép nhân thay cho 8." },
       { id: "gauss-jordan", ten: "Gauss-Jordan", doPhucTap: "O(n³)", doKho: "Vừa",
         moTa: "Giải hệ phương trình bằng biến đổi hàng, từng bước một." },

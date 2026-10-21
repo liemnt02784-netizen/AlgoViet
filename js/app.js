@@ -27,6 +27,9 @@
   if (TT.nhanDem && TT.nhanDem.gan) {
     $("dem-gan").nextElementSibling.textContent = TT.nhanDem.gan;   // đổi nhãn bộ đếm thứ 2
   }
+  if (TT.nhanDem && TT.nhanDem.soSanh) {
+    $("dem-so-sanh").nextElementSibling.textContent = TT.nhanDem.soSanh;   // đổi nhãn bộ đếm thứ 1
+  }
   AV.veThanhBen($("thanh-ben"), AV.thuatToan[id] ? id : "tim-min");
 
   // Danh sách tên các cách làm của thuật toán (for...in: duyệt qua từng tên trong đối tượng)
@@ -53,9 +56,11 @@
   var soMin = GH.min || 1;
   var soMax = GH.max || 99;
   var soLuongMax = GH.soLuongMax || 16;
+  var soLuongMin = GH.soLuongMin || 2;
   var nhanDuLieu = document.querySelector('label[for="du-lieu"]');
   if (nhanDuLieu) {
-    nhanDuLieu.textContent = "Dãy số (" + soMin + " đến " + soMax + ", tối đa " + soLuongMax + " số)";
+    nhanDuLieu.textContent = TT.ghiChuNhap ||
+      ("Dãy số (" + soMin + " đến " + soMax + ", tối đa " + soLuongMax + " số)");
   }
 
   function docDuLieu() {
@@ -74,7 +79,10 @@
       if (v < soMin || v > soMax) return { loi: "Số " + v + " nằm ngoài khoảng " + soMin + " đến " + soMax + "." };
       so.push(v);
     }
-    if (so.length < 2) return { loi: "Cần ít nhất 2 số để so sánh." };
+    if (soLuongMin === soLuongMax && so.length !== soLuongMax) {
+      return { loi: "Cần nhập đúng " + soLuongMax + " số, bạn đã nhập " + so.length + " số." };
+    }
+    if (so.length < soLuongMin) return { loi: "Cần ít nhất " + soLuongMin + " số." };
     if (so.length > soLuongMax) return { loi: "Bạn nhập " + so.length + " số, tối đa " + soLuongMax + " số để hình còn dễ nhìn." };
     return { so: so };
   }
