@@ -55,32 +55,49 @@
   }
 
   // dangXet i,j: con trỏ đang so sánh; kOut: vị trí vừa ghi vào output
+  // Mảng chính vẽ dạng BIỂU ĐỒ CỘT (giống Insertion/Shell/Heap/Quick Sort)
+  // để dễ nhìn ra thứ tự to nhỏ; mảng output (tạm) vẽ dạng ô số bên dưới.
   function ve(sanKhau, h) {
     var html = "";
-    html += '<p class="nhan-hang">Mảng a:</p><div class="hang-mang">';
     for (var p = 0; p < h.a.length; p++) {
-      var lop = "";
-      if (h.xong) lop = "khoa";
-      else if (p < h.l || p > h.r) lop = "la-con";
-      else if (p === h.i) lop = "dang-xet";
-      else if (p === h.j) lop = "so-sanh";
-      else if (p <= h.mid && h.l <= p) lop = "";
-      html += '<div class="o-mang ' + lop + '"><b>' + h.a[p] + '</b><small>a[' + p + ']</small></div>';
+      var loai = "chua-xet";
+      if (h.xong) loai = "xong";
+      else if (p < h.l || p > h.r) loai = "da-xet";       // ngoài đoạn đang trộn: làm mờ
+      else if (p === h.i) loai = "dang-xet";               // con trỏ i (nửa trái)
+      else if (p === h.j) loai = "so-sanh";                 // con trỏ j (nửa phải)
+      else if (p >= h.l && p <= h.mid) loai = "da-xep";    // thuộc nửa trái
+      else loai = "cung-nhom";                              // thuộc nửa phải
+
+      var conTro = "";
+      if (!h.xong) {
+        if (p === h.i && p === h.j) conTro = "i,j ▼";
+        else if (p === h.i) conTro = "i ▼";
+        else if (p === h.j) conTro = "j ▼";
+      }
+
+      var cao = Math.round(40 + (h.a[p] / h.max) * 190);
+      html += '<div class="cot-o">' +
+                '<div class="con-tro">' + conTro + '</div>' +
+                '<div class="nhan-tren"></div>' +
+                '<div class="cot ' + loai + '" style="height:' + cao + 'px">' + h.a[p] + '</div>' +
+                '<div class="chi-so">a[' + p + ']</div>' +
+              '</div>';
     }
-    html += '</div>';
+    var khung = '<div class="day-cot">' + html + '</div>';
 
     if (h.output) {
-      html += '<p class="nhan-hang">output (đoạn [' + h.l + ',' + h.r + ']):</p><div class="hang-mang">';
+      var hangO = '<p class="nhan-hang">output (đoạn [' + h.l + ',' + h.r + ']):</p><div class="hang-mang">';
       var soO = h.r - h.l + 1;
       for (var o = 0; o < soO; o++) {
         var gt = (o < h.output.length) ? h.output[o] : null;
         var lopO = (o === h.kOut) ? "khoa dau-khoa" : (gt !== undefined && gt !== null ? "la-con" : "");
-        html += '<div class="o-mang ' + lopO + '"><b>' + (gt === undefined || gt === null ? "·" : gt) + '</b></div>';
+        hangO += '<div class="o-mang ' + lopO + '"><b>' + (gt === undefined || gt === null ? "·" : gt) + '</b></div>';
       }
-      html += '</div>';
+      hangO += '</div>';
+      khung += '<div class="khung-heap">' + hangO + '</div>';
     }
 
-    sanKhau.innerHTML = '<div class="khung-heap">' + html + '</div>';
+    sanKhau.innerHTML = khung;
   }
 
   // =================================================================
@@ -113,13 +130,15 @@
     var n = a.length;
     var cacBuoc = [];
     var dem = { soSanh: 0, gan: 0 };
+    var lonNhat = 0;
+    for (var m0 = 0; m0 < n; m0++) { if (a[m0] > lonNhat) lonNhat = a[m0]; }
 
     function ghi(dong, giaiThich, bien, vuaDoi, hinh, cauHoi) {
       cacBuoc.push({ dong: dong, giaiThich: giaiThich, bien: bien, vuaDoi: vuaDoi,
         dem: { soSanh: dem.soSanh, gan: dem.gan }, hinh: hinh, cauHoi: cauHoi });
     }
     function chup(l, r, mid, i, j, kOut, output, xong) {
-      return { a: a.slice(), l: l, r: r, mid: mid, i: i, j: j, kOut: kOut, output: output ? output.slice() : null, xong: xong };
+      return { a: a.slice(), max: lonNhat, l: l, r: r, mid: mid, i: i, j: j, kOut: kOut, output: output ? output.slice() : null, xong: xong };
     }
 
     ghi(13, "Gọi mergeSort(a, 0, " + (n - 1) + ") để sắp xếp toàn bộ mảng.",
@@ -188,13 +207,15 @@
     var n = a.length;
     var cacBuoc = [];
     var dem = { soSanh: 0, gan: 0 };
+    var lonNhat = 0;
+    for (var m0 = 0; m0 < n; m0++) { if (a[m0] > lonNhat) lonNhat = a[m0]; }
 
     function ghi(dong, giaiThich, bien, vuaDoi, hinh, cauHoi) {
       cacBuoc.push({ dong: dong, giaiThich: giaiThich, bien: bien, vuaDoi: vuaDoi,
         dem: { soSanh: dem.soSanh, gan: dem.gan }, hinh: hinh, cauHoi: cauHoi });
     }
     function chup(l, r, mid, i, j, kOut, output, xong) {
-      return { a: a.slice(), l: l, r: r, mid: mid, i: i, j: j, kOut: kOut, output: output ? output.slice() : null, xong: xong };
+      return { a: a.slice(), max: lonNhat, l: l, r: r, mid: mid, i: i, j: j, kOut: kOut, output: output ? output.slice() : null, xong: xong };
     }
 
     for (var len = 1; len < n; len *= 2) {
