@@ -31,6 +31,8 @@ window.AlgoViet.danhSach = [
         moTa: "Xếp theo từng chữ số (đơn vị, chục, trăm...), không so sánh hai phần tử nào cả." },
       { id: "quick-sort", ten: "Quick Sort", doPhucTap: "O(n log n)", doKho: "Khó", co: true,
         moTa: "Chọn 1 số làm pivot, chia mảng thành 2 bên nhỏ hơn/lớn hơn, rồi đệ quy xuống từng bên." },
+      { id: "merge-sort", ten: "Merge Sort", doPhucTap: "O(n log n)", doKho: "Khó", co: true,
+        moTa: "Chia đôi mảng liên tục rồi trộn (merge) các đoạn đã sắp xếp lại với nhau. Có bản đệ quy và không đệ quy." },
     ],
   },
   {
